@@ -1,0 +1,266 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Student API",
+    "description": "This is the Admissions API",
+    "version": "1.0.0"
+  },
+  "host": "api.uber.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/v1",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/admissions": {
+      "get": {
+        "summary": "Get Admissions",
+        "description": "Allows submission of admission applications from local reading and scoring systems to the main campus SIS\n",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "query",
+            "description": "Student Identifier",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Admissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of products",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/admissions/status": {
+      "get": {
+        "summary": "Get Admission Status",
+        "description": "Given a \"sis-application-id\" or other id, returns the status of all admission applications assigned to that applicant, in the format of the Student/Admission Application Response EDO described on\n",
+        "parameters": [
+          {
+            "name": "student_id",
+            "in": "query",
+            "description": "Student Identifier",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Admissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of price estimates by product",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PriceEstimate"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/admissions/status/descriptors": {
+      "get": {
+        "summary": "Time Estimates",
+        "description": "Returns field names and the canonical coded values and descriptions allowed for them, in the format of the Common/FieldValueList EDO described on",
+        "parameters": [
+          {
+            "name": "customer_uuid",
+            "in": "query",
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique customer identifier to be used for experience customization."
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "type": "string",
+            "description": "Unique identifier representing a specific product for a given latitude & longitude."
+          }
+        ],
+        "tags": [
+          "Admissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of products",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of product."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people."
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product."
+        }
+      }
+    },
+    "PriceEstimate": {
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles"
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "estimate": {
+          "type": "string",
+          "description": "Formatted string of estimate in local currency of the start location. Estimate could be a range, a single number (flat rate) or \"Metered\" for TAXI."
+        },
+        "low_estimate": {
+          "type": "number",
+          "description": "Lower bound of the estimated price."
+        },
+        "high_estimate": {
+          "type": "number",
+          "description": "Upper bound of the estimated price."
+        },
+        "surge_multiplier": {
+          "type": "number",
+          "description": "Expected surge multiplier. Surge is active if surge_multiplier is greater than 1. Price estimate already factors in the surge multiplier."
+        }
+      }
+    },
+    "Profile": {
+      "type": "object",
+      "properties": {
+        "first_name": {
+          "type": "string",
+          "description": "First name of the Uber user."
+        },
+        "last_name": {
+          "type": "string",
+          "description": "Last name of the Uber user."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the Uber user"
+        },
+        "picture": {
+          "type": "string",
+          "description": "Image URL of the Uber user."
+        },
+        "promo_code": {
+          "type": "string",
+          "description": "Promo code of the Uber user."
+        }
+      }
+    },
+    "Activity": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Unique identifier for the activity"
+        }
+      }
+    },
+    "Activities": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Position in pagination."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to retrieve (100 max)."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of items available."
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

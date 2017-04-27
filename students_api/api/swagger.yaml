@@ -1,0 +1,253 @@
+---
+swagger: "2.0"
+info:
+  description: "This is the Student API"
+  version: "1.0.0"
+  title: "Student API"
+host: "students-3scale.apps.rhsademo.net"
+basePath: "/v1"
+schemes:
+- "http"
+produces:
+- "application/json"
+paths:
+  /students/{id}:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/academic-status:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student Academic Status by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdAcademic_statusGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/affiliations:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student Affiliations by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdAffiliationsGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/all:
+    get:
+      tags:
+      - "Students"
+      summary: "Get all core data about a student"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdAllGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/contacts:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student Contacts by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdContactsGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/demographic:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student demographic information (contacts, address, phone etc)\
+        \ by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdDemographicGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/dob:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student date of birth by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdDobGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+  /students/{id}/gender:
+    get:
+      tags:
+      - "Students"
+      summary: "Find Student gender by ID"
+      description: "Allows submission of admission applications from local reading\
+        \ and scoring systems to the main campus SIS\n"
+      operationId: "studentsIdGenderGET"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student Identifier"
+        required: true
+        type: "number"
+        format: "double"
+      responses:
+        200:
+          description: "Students"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Student"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Students"
+definitions:
+  Student:
+    type: "object"
+    properties:
+      first_name:
+        type: "string"
+        description: "Students First Name"
+      last_name:
+        type: "string"
+        description: "Student's last name."
+      major:
+        type: "string"
+        description: "Major of the Student"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"
